@@ -73,11 +73,25 @@ module VectorMath =
     let test = Vector3D(1.0,2.0,3.0)
     test.PrintInfo
 
-module WhatToDo =
+module Combat =
     type Player(name : string) =
-        let health = 100        
+        let mutable health = 100   
+        member this.Name = name     
         member this.Health = health
-        member this.TakeDamage(amount : int) = 
+        member this.TakeDamage(amount : int) =  health <- health - amount
+        member this.Attack(target : Player) = target.TakeDamage(10);
+    
+    let Fighters = [ Player("Bob"); Player("George"); Player("Jose") ]
+
+    let Fight =  for player in Fighters do
+                    if player.Health > 0 then
+                        Player("Enemy").Attack(player)           
+                         
+    let printInfo = for player in Fighters do
+                        printf "\nFighter: %A Health: %i" player.Name player.Health
+    
+    
+   
     
 
     
