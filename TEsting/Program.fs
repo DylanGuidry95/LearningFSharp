@@ -7,8 +7,8 @@ module Learning =
     let Name = "Dylan"
     printfn "Your name is: \n%A" Name
     let addString a b = a + b
-    let test = addString 2 3
-    printfn "Add strings: \n%A" test
+    printfn "Add strings: \n%A"
+    
 
 
 module Stuff =     
@@ -35,7 +35,40 @@ module Application =
     let validStuff = IsValidBirthdate Dylan
     printf "%A" validStuff
 
-                                     
+module SimpleMath = 
+    let Add (a:int,b:int) = a + b;
+    let Subtraction (a:int, b:int) = a - b
+    let Multiplication (a:int, b:int) = a * b
+    let Division(a:int, b:int) = a / b
+    let Square(a:int) = a * a   
+                           
+                           
+module VectorMath = 
+    type Vector2D(xPos : float, yPos : float) = 
+        let magnitude = sqrt(xPos*xPos + yPos*yPos)        
+        member this.X = xPos
+        member this.Y = yPos
+        member this.Magnitude = magnitude
+        member this.Dot(rhs : Vector2D) = xPos * rhs.X + yPos * rhs.Y
+        member this.Add(rhs : Vector2D) = Vector2D(xPos + rhs.X, yPos + rhs.Y)                
+        member this.Subtraction(rhs : Vector2D) = Vector2D(xPos - rhs.X, yPos - rhs.Y)
+        member this.Scale(scalar : float) = Vector2D(xPos * scalar, yPos * scalar)
+        member this.Normalize = Vector2D(xPos / magnitude, yPos / magnitude)                 
+
+    type Vector3D(xPos : float, yPos : float, zPos : float) = 
+        let magnitude = sqrt(xPos*xPos + yPos*yPos + zPos*zPos)
+        member this.X = xPos
+        member this.Y = yPos
+        member this.Z = zPos
+        member this.Magnitude = magnitude
+        member this.Dot(rhs : Vector3D) = xPos * rhs.X + yPos * rhs.Y + zPos * rhs.Z
+        member this.Add(rhs : Vector3D) = Vector3D(xPos + rhs.X, yPos + rhs.Y, zPos + rhs.Z)                
+        member this.Subtraction(rhs : Vector3D) = Vector3D(xPos - rhs.X, yPos - rhs.Y, zPos - rhs.Z)
+        member this.Scale(scalar : float) = Vector3D(xPos * scalar, yPos * scalar, zPos * scalar)
+        member this.Normalize = Vector3D(xPos / magnitude, yPos / magnitude, zPos / magnitude)
+        member this.Cross(rhs : Vector3D) = Vector3D(yPos * rhs.Z - zPos * rhs.Y, zPos*rhs.X - xPos*rhs.Z, xPos*rhs.Y - yPos * rhs.X)  
+
+                                    
     
 
     
