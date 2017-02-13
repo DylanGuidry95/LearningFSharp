@@ -43,32 +43,41 @@ module SimpleMath =
     let Square(a:int) = a * a   
                            
                            
-module VectorMath = 
-    type Vector2D(xPos : float, yPos : float) = 
-        let magnitude = sqrt(xPos*xPos + yPos*yPos)        
+module VectorMath =
+    type Vector2D(xPos : float, yPos : float) =
+        let magnitude = sqrt(xPos*xPos + yPos*yPos)
         member this.X = xPos
         member this.Y = yPos
         member this.Magnitude = magnitude
         member this.Dot(rhs : Vector2D) = xPos * rhs.X + yPos * rhs.Y
-        member this.Add(rhs : Vector2D) = Vector2D(xPos + rhs.X, yPos + rhs.Y)                
+        member this.Add(rhs : Vector2D) = Vector2D(xPos + rhs.X, yPos + rhs.Y)
         member this.Subtraction(rhs : Vector2D) = Vector2D(xPos - rhs.X, yPos - rhs.Y)
         member this.Scale(scalar : float) = Vector2D(xPos * scalar, yPos * scalar)
-        member this.Normalize = Vector2D(xPos / magnitude, yPos / magnitude)                 
+        member this.Normalize = Vector2D(xPos / magnitude, yPos / magnitude)
+        member this.PrintInfo = printf "X = %f Y = %f" xPos yPos
 
-    type Vector3D(xPos : float, yPos : float, zPos : float) = 
+    type Vector3D(xPos : float, yPos : float, zPos : float) =
         let magnitude = sqrt(xPos*xPos + yPos*yPos + zPos*zPos)
         member this.X = xPos
         member this.Y = yPos
         member this.Z = zPos
         member this.Magnitude = magnitude
         member this.Dot(rhs : Vector3D) = xPos * rhs.X + yPos * rhs.Y + zPos * rhs.Z
-        member this.Add(rhs : Vector3D) = Vector3D(xPos + rhs.X, yPos + rhs.Y, zPos + rhs.Z)                
+        member this.Add(rhs : Vector3D) = Vector3D(xPos + rhs.X, yPos + rhs.Y, zPos + rhs.Z)
         member this.Subtraction(rhs : Vector3D) = Vector3D(xPos - rhs.X, yPos - rhs.Y, zPos - rhs.Z)
         member this.Scale(scalar : float) = Vector3D(xPos * scalar, yPos * scalar, zPos * scalar)
         member this.Normalize = Vector3D(xPos / magnitude, yPos / magnitude, zPos / magnitude)
-        member this.Cross(rhs : Vector3D) = Vector3D(yPos * rhs.Z - zPos * rhs.Y, zPos*rhs.X - xPos*rhs.Z, xPos*rhs.Y - yPos * rhs.X)  
+        member this.Cross(rhs : Vector3D) = Vector3D(yPos * rhs.Z - zPos * rhs.Y, zPos*rhs.X - xPos*rhs.Z, xPos*rhs.Y - yPos * rhs.X)
+        member this.PrintInfo = printf "X = %f Y = %f Z = %f" xPos yPos zPos
+        
+    let test = Vector3D(1.0,2.0,3.0)
+    test.PrintInfo
 
-                                    
+module WhatToDo =
+    type Player(name : string) =
+        let health = 100        
+        member this.Health = health
+        member this.TakeDamage(amount : int) = 
     
 
     
