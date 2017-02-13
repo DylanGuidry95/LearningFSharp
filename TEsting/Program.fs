@@ -8,8 +8,6 @@ module Learning =
     printfn "Your name is: \n%A" Name
     let addString a b = a + b
     printfn "Add strings: \n%A"
-    
-
 
 module Stuff =     
     type Person =
@@ -83,16 +81,13 @@ module Combat =
     
     let Fighters = [ Player("Bob"); Player("George"); Player("Jose") ]
 
+    let fighterAlive = Fighters.[0].Health > 0 && Fighters.[1].Health > 0 && Fighters.[2].Health > 0 
+
+    let printInfo(player : Player) = printf "\nFighter: %A Health: %i" player.Name player.Health
+
     let Fight =  for player in Fighters do
-                    if player.Health > 0 then
-                        Player("Enemy").Attack(player)           
-                         
-    let printInfo = for player in Fighters do
-                        printf "\nFighter: %A Health: %i" player.Name player.Health
-    
-    
-   
-    
-
-    
-
+                        if player.Health > 0 then
+                            Player("Enemy").Attack(player)
+                            printInfo(player)                           
+    while fighterAlive do
+        Fight
