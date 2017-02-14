@@ -1,8 +1,5 @@
 ﻿// Learn more about F# at http://fsharp.org
 // See the 'F# Tutorial' project for more help.
-
-
-
 module Learning = 
     let Name = "Dylan"
     printfn "Your name is: \n%A" Name
@@ -88,4 +85,51 @@ module Combat =
     let Fight =  for player in Fighters do
                         if player.Health > 0 then
                             Player("Enemy").Attack(player)
-                            printInfo(player)                           
+                            printInfo(player)             
+                            
+module MoreLearning = 
+    let AddStrings(a : string , b : string, c: string) = a + b + c
+    type State (name : string) = 
+        member this.Name = name
+    type FSM(initState: State) =
+        let mutable transitions = []
+        let mutable states = [ initState ]
+        let mutable currentState = initState
+        member this.AddState newState = 
+            states <- newState :: states
+        member this.GetStates = states
+        member this.GetTransitions = transitions
+        member this.GetCurrentState = currentState
+        member this.AddTransition (start : State, goal : State) = 
+                                                    transitions <- AddStrings(start.Name, ">", goal.Name) :: transitions
+        member this.TryTransition (goal : State)  = for trans in transitions do
+                                                        if trans = AddStrings(currentState.Name, ">", goal.Name) then
+                                                            currentState <- goal
+                                                            printf "%A" currentState.Name
+
+    let init = State("init")
+    let idle = State("idle")
+    let walk = State("walk")
+    let dead = State("dead")
+    let exit = State("exit")
+
+    let stateMachine = FSM init
+    stateMachine.AddState idle
+    stateMachine.AddState walk
+    stateMachine.AddState dead
+    stateMachine.AddState exit
+    stateMachine.AddTransition(init, idle)
+    stateMachine.AddTransition(idle, walk)
+    stateMachine.AddTransition(idle, dead)
+    stateMachine.AddTransition(walk, idle)
+    stateMachine.AddTransition(dead, exit)
+
+    stateMachine.TryTransition(idle)
+    stateMachine.TryTransition(init)
+    stateMachine.TryTransition(walk)
+    stateMachine.TryTransition(dead)
+    stateMachine.TryTransition(idle)
+    stateMachine.TryTransition(dead)
+    stateMachine.TryTransition(init)
+    stateMachine.TryTransition(walk)
+    stateMachine.TryTransition(exit)
