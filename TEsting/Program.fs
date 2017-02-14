@@ -133,3 +133,15 @@ module MoreLearning =
     stateMachine.TryTransition(init)
     stateMachine.TryTransition(walk)
     stateMachine.TryTransition(exit)
+
+module ReadFromFile = 
+    type Readfile() = 
+        let file = new System.IO.StreamReader(@"C:\Users\dylan.guidry\Documents\Visual Studio 2015\Projects\LearningFSharp\TEsting\readme1.txt")
+        member this.ReadLine = file.ReadToEnd()                                 
+        member this.CloseFile = file.Close()
+
+    let a = Readfile()
+    printf "%A" a.ReadLine
+    a.CloseFile   
+     
+      
