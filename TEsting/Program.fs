@@ -89,5 +89,3 @@ module Combat =
                         if player.Health > 0 then
                             Player("Enemy").Attack(player)
                             printInfo(player)                           
-    while fighterAlive do
-        Fight
